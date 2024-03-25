@@ -1,11 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
-use PhpParser\Node\Stmt\Goto_;
 
-use function PHPUnit\Framework\fileExists;
-use function Webmozart\Assert\Tests\StaticAnalysis\length;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +17,4 @@ use function Webmozart\Assert\Tests\StaticAnalysis\length;
 
 
 Route::get('/', function () {
-
-
-
-    $image =   env('PUBLIC_STORAGE') . "/userAvatar/default.png";
-    fileExists($image);
-   
 });

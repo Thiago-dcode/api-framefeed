@@ -26,8 +26,8 @@ class PostFactory extends Factory
 
 
         //get a random image
-        $image = env('PUBLIC_STORAGE') . "/" . $images[rand(0, count($images) - 1)];
-     
+        $image = env('PUBLIC_STORAGE') . $images[rand(0, count($images) - 1)];
+
         //and check his size
         $imageSize = getimagesize($image);
 
