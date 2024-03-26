@@ -11,8 +11,7 @@ use App\Traits\HttpResponses;
 
 use Laravel\Sanctum\HasApiTokens;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePostRequest;
-use Illuminate\Support\Facades\Storage;
+
 
 
 class PostController extends Controller
@@ -118,11 +117,13 @@ class PostController extends Controller
 
         //Storing the image field on the public folder.
         $fields['image'] = $request->file('image')->store('postImages');
-        $imagePath  = public_path() . "/storage/" . $fields['image'];
-        $fields['image_shape'] = $this->setImgShape($imagePath);
-
+        $imagePath  = public_path('storage') . '/'. $fields['image'];
+        dd($imagePath);
         $fields['image'] = env('PUBLIC_STORAGE')  . $fields['image'];
-
+        $fields['image_shape'] = $this->setImgShape($imagePath);
+      
+      
+  
 
         //Setting up the image shape 
 
