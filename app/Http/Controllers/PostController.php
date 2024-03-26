@@ -19,9 +19,10 @@ class PostController extends Controller
     private function setImgShape($image)
     {
 
+        $imageShape = 'square';
+        if (!file_exists($image)) return $imageShape;
         $imageSize = getimagesize($image);
 
-        $imageShape = 'square';
 
         if ($imageSize[0] > $imageSize[1]) $imageShape = 'horizontal';
         elseif ($imageSize[0] < $imageSize[1]) $imageShape = 'vertical';
@@ -117,13 +118,12 @@ class PostController extends Controller
 
         //Storing the image field on the public folder.
         $fields['image'] = $request->file('image')->store('postImages');
-        $imagePath  = public_path('storage') . '/'. $fields['image'];
-        dd($imagePath);
+        $imagePath  = public_path('storage') . '/' . $fields['image'];
+
         $fields['image'] = env('PUBLIC_STORAGE')  . $fields['image'];
         $fields['image_shape'] = $this->setImgShape($imagePath);
-      
-      
-  
+
+
 
         //Setting up the image shape 
 
