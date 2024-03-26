@@ -26,6 +26,12 @@ return [
     'allowed_headers' => ['*'],
 
     'exposed_headers' => [],
+    'supportedContentTypes' => [
+        'model/gltf-binary',
+        'application/json',
+        'text/html',
+        'multipart/form-data'
+    ],
 
     'max_age' => 0,
 
