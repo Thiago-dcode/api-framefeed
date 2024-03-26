@@ -21,7 +21,7 @@ class PostController extends Controller
     {
 
         $imageSize = getimagesize($image);
-
+      
         $imageShape = 'square';
 
         if ($imageSize[0] > $imageSize[1]) $imageShape = 'horizontal';
@@ -113,12 +113,17 @@ class PostController extends Controller
         //creating a excerpt basing on the body field
         $excerpt = substr($fields['body'], 0, round(mb_strlen($fields['body']) * 0.2)) . '...';
         $fields['excerpt'] = $excerpt;
+
         //Storing the image field on the public folder.
         $fields['image'] = $request->file('image')->store('postImages');
-        $fields['image'] = env('PUBLIC_STORAGE') . "/" . $fields['image'];
+        $imagePath  = public_path() . "/storage/" . $fields['image'];
+        $fields['image_shape'] = $this->setImgShape($imagePath);
+       
+        $fields['image'] = env('PUBLIC_STORAGE')  . $fields['image'];
+
 
         //Setting up the image shape 
-        $fields['image_shape'] = $this->setImgShape($fields['image']);
+       
 
         //Creating post
 
@@ -176,10 +181,12 @@ class PostController extends Controller
         //Storing the image field on the public folder.
         if (isset($fields['image'])) {
             $fields['image'] = $request->file('image')->store('postImages');
+
+            $imagePath  = public_path() . "/storage/" . $fields['image'];
+            $fields['image_shape'] = $this->setImgShape($imagePath);
+
             $fields['image'] = env('PUBLIC_STORAGE') . $fields['image'];
 
-            //Setting up the image shape 
-            $fields['image_shape'] = $this->setImgShape($fields['image']);
         }
         //Editing post
 
