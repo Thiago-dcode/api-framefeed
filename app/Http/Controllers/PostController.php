@@ -94,7 +94,7 @@ class PostController extends Controller
     {
 
 
-        dd($request);
+        // dd($request);
 
         $fields = $request->validate([
             'title' => 'required|max:100|min:3',
