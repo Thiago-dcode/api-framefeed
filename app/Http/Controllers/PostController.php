@@ -176,7 +176,7 @@ class PostController extends Controller
         //Storing the image field on the public folder.
         if (isset($fields['image'])) {
             $fields['image'] = $request->file('image')->store('postImages');
-            $fields['image'] = env('PUBLIC_STORAGE') . "/" . $fields['image'];
+            $fields['image'] = env('PUBLIC_STORAGE') . $fields['image'];
 
             //Setting up the image shape 
             $fields['image_shape'] = $this->setImgShape($fields['image']);
