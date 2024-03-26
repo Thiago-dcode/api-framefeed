@@ -21,7 +21,7 @@ class PostController extends Controller
     {
 
         $imageSize = getimagesize($image);
-      
+
         $imageShape = 'square';
 
         if ($imageSize[0] > $imageSize[1]) $imageShape = 'horizontal';
@@ -94,6 +94,8 @@ class PostController extends Controller
     {
 
 
+        dd($request);
+
         $fields = $request->validate([
             'title' => 'required|max:100|min:3',
             'image' => 'required|image',
@@ -118,12 +120,12 @@ class PostController extends Controller
         $fields['image'] = $request->file('image')->store('postImages');
         $imagePath  = public_path() . "/storage/" . $fields['image'];
         $fields['image_shape'] = $this->setImgShape($imagePath);
-       
+
         $fields['image'] = env('PUBLIC_STORAGE')  . $fields['image'];
 
 
         //Setting up the image shape 
-       
+
 
         //Creating post
 
@@ -186,7 +188,6 @@ class PostController extends Controller
             $fields['image_shape'] = $this->setImgShape($imagePath);
 
             $fields['image'] = env('PUBLIC_STORAGE') . $fields['image'];
-
         }
         //Editing post
 
